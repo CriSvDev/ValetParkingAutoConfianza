@@ -4,21 +4,31 @@ import java.awt.BorderLayout;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import model.ClienteEntity;
+import model.VehiculoEntity;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
-import com.toedter.calendar.JDateChooser;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.Color;
 
 public class IngresoClientes extends JDialog {
 
-	/**
+	/** 
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
+	private JTextField txtDoi;
+	private JTextField txtTelefono;
+	private JTextField txtApellido;
+	private JTextField txtNombre;
+	private JTextField txtPlaca;
+	private JTextField txtEmpresa;
+	private JComboBox<String> cboTipo;
 
 	/**
 	 * Launch the application.
@@ -36,66 +46,112 @@ public class IngresoClientes extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public IngresoClientes() {
-		setBounds(100, 100, 600, 409);
+		setBounds(100, 100, 732, 373);
 		getContentPane().setLayout(new BorderLayout());
+		contentPanel.setBackground(new Color(0, 153, 153));
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
+		setLocationRelativeTo(null);
 		
-		textField = new JTextField();
-		textField.setBounds(104, 76, 176, 35);
-		contentPanel.add(textField);
-		textField.setColumns(10);
+		txtDoi = new JTextField();
+		txtDoi.setBounds(149, 155, 176, 35);
+		contentPanel.add(txtDoi);
+		txtDoi.setColumns(10);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(104, 121, 176, 35);
-		contentPanel.add(textField_1);
+		txtTelefono = new JTextField();
+		txtTelefono.setBounds(149, 206, 176, 35);
+		txtTelefono.setColumns(10);
+		contentPanel.add(txtTelefono);
 		
-		JLabel lblNewLabel = new JLabel("Placa");
-		lblNewLabel.setBounds(22, 87, 83, 24);
+		JLabel lblNewLabel = new JLabel("DOI");
+		lblNewLabel.setBounds(22, 160, 83, 24);
 		contentPanel.add(lblNewLabel);
 		
-		JLabel lblNewLabel_1 = new JLabel("Nombre");
-		lblNewLabel_1.setBounds(22, 132, 83, 24);
-		contentPanel.add(lblNewLabel_1);
+		JLabel lblTelefono = new JLabel("Telefono");
+		lblTelefono.setBounds(22, 211, 83, 24);
+		contentPanel.add(lblTelefono);
 		
-		JLabel lblNewLabel_2 = new JLabel("Vigencia in");
-		lblNewLabel_2.setBounds(22, 177, 83, 24);
-		contentPanel.add(lblNewLabel_2);
-		
-		JLabel lblNewLabel_3 = new JLabel("Vigencia Fina");
-		lblNewLabel_3.setBounds(22, 222, 83, 24);
-		contentPanel.add(lblNewLabel_3);
-		
-		JButton btnNewButton = new JButton("Guardar");
-		btnNewButton.setBounds(423, 83, 105, 51);
-		contentPanel.add(btnNewButton);
-		
-		JButton btnSalir = new JButton("Salir");
-		btnSalir.setBounds(423, 158, 105, 51);
-		contentPanel.add(btnSalir);
+		JButton btnRegistrar = new JButton("Registrar");
+		btnRegistrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				String nombre = txtNombre.getText();
+				String apellido = txtApellido.getText();
+				String doi = txtDoi.getText();
+				int telefono = Integer.parseInt(txtTelefono.getText());
+				String empresa = txtEmpresa.getText();
+				
+				String placa = txtPlaca.getText();
+				String tipo = String.valueOf(cboTipo.getSelectedItem());
+				
+			
+				VehiculoEntity Vehiculo = new VehiculoEntity();
+				Vehiculo.setPlaca(placa);
+				Vehiculo.setTipo(tipo);
+			
+				ClienteEntity Cliente = new ClienteEntity();
+				Cliente.setNombre(nombre);
+				Cliente.setApellido(apellido);
+				Cliente.setDoi(doi);
+				Cliente.setTelefono(telefono);
+				Cliente.setEmpresa(empresa);
+
+					
+			}
+		});
+		btnRegistrar.setBounds(562, 262, 105, 51);
+		contentPanel.add(btnRegistrar);
 		
 		JLabel lblNewLabel_2_1 = new JLabel("Ficha de registro nuevos clientes:");
 		lblNewLabel_2_1.setBounds(22, 10, 280, 24);
 		contentPanel.add(lblNewLabel_2_1);
 		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBounds(104, 263, 176, 35);
-		contentPanel.add(textField_2);
+		txtApellido = new JTextField();
+		txtApellido.setBounds(149, 110, 176, 35);
+		txtApellido.setColumns(10);
+		contentPanel.add(txtApellido);
 		
-		JLabel lblNewLabel_3_1 = new JLabel("Tarifa Mensual");
-		lblNewLabel_3_1.setBounds(22, 268, 83, 24);
-		contentPanel.add(lblNewLabel_3_1);
+		JLabel lblApellido = new JLabel("Apellido");
+		lblApellido.setBounds(22, 115, 83, 24);
+		contentPanel.add(lblApellido);
 		
-		JDateChooser dateChooser = new JDateChooser();
-		dateChooser.setBounds(104, 166, 177, 30);
-		contentPanel.add(dateChooser);
+		txtNombre = new JTextField();
+		txtNombre.setBounds(149, 65, 176, 35);
+		txtNombre.setColumns(10);
+		contentPanel.add(txtNombre);
 		
-		JDateChooser dateChooser_1 = new JDateChooser();
-		dateChooser_1.setBounds(103, 216, 177, 30);
-		contentPanel.add(dateChooser_1);
+		JLabel lblNombre = new JLabel("Nombre");
+		lblNombre.setBounds(22, 70, 83, 24);
+		contentPanel.add(lblNombre);
+		
+		txtPlaca = new JTextField();
+		txtPlaca.setBounds(493, 110, 176, 35);
+		txtPlaca.setColumns(10);
+		contentPanel.add(txtPlaca);
+		
+		JLabel lblPlaca = new JLabel("Placa");
+		lblPlaca.setBounds(366, 115, 83, 24);
+		contentPanel.add(lblPlaca);
+		
+		txtEmpresa = new JTextField();
+		txtEmpresa.setBounds(493, 60, 176, 35);
+		txtEmpresa.setColumns(10);
+		contentPanel.add(txtEmpresa);
+		
+		JLabel lblEmpresa = new JLabel("Empresa");
+		lblEmpresa.setBounds(366, 65, 83, 24);
+		contentPanel.add(lblEmpresa);
+		
+		JLabel lblTipo = new JLabel("Tipo Veh.");
+		lblTipo.setBounds(366, 160, 83, 24);
+		contentPanel.add(lblTipo);
+		
+		cboTipo = new JComboBox<String>();
+		cboTipo.setModel(new DefaultComboBoxModel(new String[] {"Vehiculo", "Moto"}));
+		cboTipo.setBounds(493, 155, 176, 30);
+		contentPanel.add(cboTipo);
 	}
 }
